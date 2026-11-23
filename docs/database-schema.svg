@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="660" viewBox="0 0 1120 660">
+  <defs>
+    <style>
+      .bg { fill: #2C1E16; }
+      .title { font: bold 22px 'Segoe UI', Arial, sans-serif; fill: #FFFFFF; }
+      .subtitle { font: 13px 'Segoe UI', Arial, sans-serif; fill: #DFCFC2; }
+      .tbl-box { fill: #3C291F; stroke: #8C4F24; stroke-width: 2; rx: 8; }
+      .tbl-head { fill: #A86434; }
+      .tbl-name { font: bold 14px 'Segoe UI', Arial, sans-serif; fill: #FFFFFF; }
+      .col-text { font: 12px Consolas, 'Courier New', monospace; fill: #F5ECE6; }
+      .pk { fill: #FFD27D; font-weight: bold; }
+      .fk { fill: #9AD9FF; font-weight: bold; }
+      .rel { stroke: #C47B46; stroke-width: 2; fill: none; }
+      .rel-label { font: 11px 'Segoe UI', Arial, sans-serif; fill: #DFCFC2; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#C47B46" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1120" height="660" />
+  <text x="30" y="38" class="title">PawShelter — ER-диаграмма базы данных</text>
+  <text x="30" y="60" class="subtitle">Microsoft SQL Server Express • 6 таблиц • Первичные (PK) и внешние (FK) ключи</text>
+
+  
+  <path class="rel" d="M 290 155 L 390 155" marker-end="url(#arrow)" />
+  <text x="315" y="147" class="rel-label">1 : N</text>
+
+  <path class="rel" d="M 290 365 L 340 365 L 340 215 L 390 215" marker-end="url(#arrow)" />
+  <text x="300" y="357" class="rel-label">1 : 0..N</text>
+
+  <path class="rel" d="M 690 165 L 790 165" marker-end="url(#arrow)" />
+  <text x="720" y="157" class="rel-label">1 : N</text>
+
+  <path class="rel" d="M 690 255 L 740 255 L 740 375 L 790 375" marker-end="url(#arrow)" />
+  <text x="700" y="247" class="rel-label">1 : N</text>
+
+  <path class="rel" d="M 690 520 L 790 435" marker-end="url(#arrow)" />
+  <text x="715" y="475" class="rel-label">1 : N</text>
+
+  
+  <g transform="translate(30, 95)">
+    <rect class="tbl-box" width="260" height="115" />
+    <rect class="tbl-head" width="260" height="32" rx="6" />
+    <text x="12" y="21" class="tbl-name">Species (Виды)</text>
+    <text x="12" y="54" class="col-text"><tspan class="pk">PK</tspan> Id : INT</text>
+    <text x="12" y="76" class="col-text">   Name : NVARCHAR(100) UQ</text>
+  </g>
+
+  
+  <g transform="translate(30, 275)">
+    <rect class="tbl-box" width="260" height="175" />
+    <rect class="tbl-head" width="260" height="32" rx="6" />
+    <text x="12" y="21" class="tbl-name">Enclosures (Вольеры)</text>
+    <text x="12" y="54" class="col-text"><tspan class="pk">PK</tspan> Id : INT</text>
+    <text x="12" y="76" class="col-text">   Code : NVARCHAR(30) UQ</text>
+    <text x="12" y="98" class="col-text">   Capacity : INT</text>
+    <text x="12" y="120" class="col-text">   CurrentCount : INT</text>
+    <text x="12" y="142" class="col-text">   Status : NVARCHAR(30)</text>
+  </g>
+
+  
+  <g transform="translate(390, 95)">
+    <rect class="tbl-box" width="300" height="240" />
+    <rect class="tbl-head" width="300" height="32" rx="6" />
+    <text x="12" y="21" class="tbl-name">Animals (Животные)</text>
+    <text x="12" y="54" class="col-text"><tspan class="pk">PK</tspan> Id : INT</text>
+    <text x="12" y="76" class="col-text">   Name : NVARCHAR(100)</text>
+    <text x="12" y="98" class="col-text"><tspan class="fk">FK</tspan> SpeciesId : INT</text>
+    <text x="12" y="120" class="col-text"><tspan class="fk">FK</tspan> EnclosureId : INT (NULL)</text>
+    <text x="12" y="142" class="col-text">   AgeYears : DECIMAL(4,1)</text>
+    <text x="12" y="164" class="col-text">   AdmissionDate : DATE</text>
+    <text x="12" y="186" class="col-text">   Status : NVARCHAR(30)</text>
+    <text x="12" y="208" class="col-text">   IsArchived : BIT</text>
+  </g>
+
+  
+  <g transform="translate(390, 425)">
+    <rect class="tbl-box" width="300" height="175" />
+    <rect class="tbl-head" width="300" height="32" rx="6" />
+    <text x="12" y="21" class="tbl-name">Adopters (Усыновители)</text>
+    <text x="12" y="54" class="col-text"><tspan class="pk">PK</tspan> Id : INT</text>
+    <text x="12" y="76" class="col-text">   FullName : NVARCHAR(150)</text>
+    <text x="12" y="98" class="col-text">   Phone : NVARCHAR(30)</text>
+    <text x="12" y="120" class="col-text">   Email : NVARCHAR(100)</text>
+    <text x="12" y="142" class="col-text">   IsBlacklisted : BIT</text>
+  </g>
+
+  
+  <g transform="translate(790, 95)">
+    <rect class="tbl-box" width="300" height="175" />
+    <rect class="tbl-head" width="300" height="32" rx="6" />
+    <text x="12" y="21" class="tbl-name">MedicalRecords (Медкарты)</text>
+    <text x="12" y="54" class="col-text"><tspan class="pk">PK</tspan> Id : INT</text>
+    <text x="12" y="76" class="col-text"><tspan class="fk">FK</tspan> AnimalId : INT</text>
+    <text x="12" y="98" class="col-text">   RecordDate : DATE</text>
+    <text x="12" y="120" class="col-text">   Diagnosis : NVARCHAR(250)</text>
+    <text x="12" y="142" class="col-text">   VaccinationDone : BIT</text>
+  </g>
+
+  
+  <g transform="translate(790, 325)">
+    <rect class="tbl-box" width="300" height="175" />
+    <rect class="tbl-head" width="300" height="32" rx="6" />
+    <text x="12" y="21" class="tbl-name">Adoptions (Передачи)</text>
+    <text x="12" y="54" class="col-text"><tspan class="pk">PK</tspan> Id : INT</text>
+    <text x="12" y="76" class="col-text"><tspan class="fk">FK</tspan> AnimalId : INT</text>
+    <text x="12" y="98" class="col-text"><tspan class="fk">FK</tspan> AdopterId : INT</text>
+    <text x="12" y="120" class="col-text">   AdoptionDate : DATE</text>
+    <text x="12" y="142" class="col-text">   Notes : NVARCHAR(300)</text>
+  </g>
+</svg>
