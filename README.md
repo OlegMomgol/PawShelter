@@ -59,5 +59,26 @@
 * В **Visual Studio** откройте решение/проект из папки `src/` и нажмите `F5`.
 * В **PowerShell** выполните сборку и запуск проекта из папки `src/`:
 
-```powershell
-dotnet run --project src/PawShelter/PawShelter.csproj
+
+### Скриншоты
+<img width="1266" height="721" alt="main_screen" src="https://github.com/user-attachments/assets/ca9a4c95-35b0-4e3a-b249-33cd323727fa" />
+Меню где можно добавить или поменять статусы у животных 
+<img width="1267" height="719" alt="addition" src="https://github.com/user-attachments/assets/f83422df-2cfd-4bd4-8a29-0113ac55f33b" />
+Добавление нового питомца 
+<img width="1260" height="709" alt="finish_addition" src="https://github.com/user-attachments/assets/30e91a8a-2a2a-4b32-881c-3e297229f512" />
+Успешное добавление и завершение данной операции
+<img width="1268" height="715" alt="change_status" src="https://github.com/user-attachments/assets/29dd4bc9-e216-4b93-8ebe-851ae7ada335" />
+Смена статуса у питомца 
+<img width="1265" height="716" alt="finish_status" src="https://github.com/user-attachments/assets/1f27fb92-665f-4511-9105-70e21e73432b" />
+Успешное изменение статуса у животного
+<img width="1258" height="711" alt="search" src="https://github.com/user-attachments/assets/07a4be2f-86e6-4524-b7b6-2519ebde5ad0" />
+Поиск животного по имени
+<img width="954" height="606" alt="report" src="https://github.com/user-attachments/assets/178b733c-a2c4-4957-9376-1f3cc60cdb22" />
+Отчет
+
+
+
+
+
+
+
