@@ -1,0 +1,395 @@
+﻿<Window x:Class="PawShelter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PawShelter — Приют для животных" Height="660" Width="980"
+        MinHeight="560" MinWidth="820"
+        Background="#2C1E16"
+        Foreground="#FFFFFF"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Коричневая карточка -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#3C291F"/>
+            <Setter Property="BorderBrush" Value="#5C4030"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="14"/>
+        </Style>
+
+        <!-- Основная кнопка (карамельно-коричневая с белым текстом) -->
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#A86434"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderBrush" Value="#C47B46"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="14,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#BE743F"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#8B5128"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Вторичная кнопка (кофейная с белым текстом) -->
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#563C2D"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="BorderBrush" Value="#75533F"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#694937"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#432E22"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Текстовое поле -->
+        <Style x:Key="InputBox" TargetType="TextBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Background" Value="#241711"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="CaretBrush" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#6B4C3B"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Выпадающий список (полностью коричневый с белым текстом и корректным отображением значений) -->
+        <Style x:Key="InputCombo" TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Background" Value="#241711"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#6B4C3B"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Background" Value="#2C1E16"/>
+                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                        <Setter Property="Padding" Value="8,6"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ComboBoxItem">
+                                    <Border x:Name="ItemBorder"
+                                            Background="{TemplateBinding Background}"
+                                            Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsHighlighted" Value="True">
+                                            <Setter TargetName="ItemBorder" Property="Background" Value="#5A3B28"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="ItemBorder" Property="Background" Value="#8C4F24"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border x:Name="MainBorder"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="6">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="26"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0"
+                                               Margin="{TemplateBinding Padding}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Foreground="{TemplateBinding Foreground}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Text" Value="{Binding SelectionBoxItem, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding DisplayMemberPath, RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="Name">
+                                                        <Setter Property="Text" Value="{Binding SelectionBoxItem.Name, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding DisplayMemberPath, RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="Code">
+                                                        <Setter Property="Text" Value="{Binding SelectionBoxItem.Code, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <Path Grid.Column="1"
+                                          Data="M 0 0 L 4 4 L 8 0 Z"
+                                          Fill="#FFFFFF"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                                    <ToggleButton Grid.ColumnSpan="2"
+                                                  Background="Transparent"
+                                                  BorderThickness="0"
+                                                  Focusable="False"
+                                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <ToggleButton.Template>
+                                            <ControlTemplate TargetType="ToggleButton">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </ToggleButton.Template>
+                                    </ToggleButton>
+                                </Grid>
+                            </Border>
+                            <Popup x:Name="PART_Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Fade">
+                                <Border Background="#2C1E16"
+                                        BorderBrush="#6B4C3B"
+                                        BorderThickness="1"
+                                        CornerRadius="6"
+                                        Margin="0,2,0,0"
+                                        MinWidth="{TemplateBinding ActualWidth}"
+                                        MaxHeight="220">
+                                    <ScrollViewer CanContentScroll="True">
+                                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 1. Шапка приложения -->
+        <Border Grid.Row="0" Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+            <DockPanel LastChildFill="False">
+                <StackPanel DockPanel.Dock="Left">
+                    <TextBlock Text="PawShelter" FontSize="22" FontWeight="Bold" Foreground="#FFFFFF"/>
+                    <TextBlock Text="Учёт животных, вольеров и статусов в приюте"
+                               FontSize="12" Foreground="#DFCFC2" Margin="0,2,0,0"/>
+                </StackPanel>
+                <Button DockPanel.Dock="Right" Content="Сводный отчёт"
+                        Style="{StaticResource PrimaryButton}" VerticalAlignment="Center"
+                        Click="ReportButton_Click"/>
+            </DockPanel>
+        </Border>
+
+        <!-- 2. Поиск и фильтрация -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+            <WrapPanel VerticalAlignment="Center">
+                <TextBlock Text="Кличка:" Foreground="#FFFFFF" FontWeight="Medium"
+                           VerticalAlignment="Center" Margin="0,0,6,4"/>
+                <TextBox x:Name="SearchTextBox" Style="{StaticResource InputBox}"
+                         Width="175" Margin="0,0,12,4" ToolTip="Введите часть клички"/>
+
+                <TextBlock Text="Вид:" Foreground="#FFFFFF" FontWeight="Medium"
+                           VerticalAlignment="Center" Margin="0,0,6,4"/>
+                <ComboBox x:Name="SpeciesFilterComboBox" Style="{StaticResource InputCombo}"
+                          Width="140" Margin="0,0,12,4"
+                          DisplayMemberPath="Name" SelectedValuePath="Id"/>
+
+                <TextBlock Text="Статус:" Foreground="#FFFFFF" FontWeight="Medium"
+                           VerticalAlignment="Center" Margin="0,0,6,4"/>
+                <ComboBox x:Name="StatusFilterComboBox" Style="{StaticResource InputCombo}"
+                          Width="135" Margin="0,0,12,4"/>
+
+                <Button Content="Найти / Обновить" Style="{StaticResource PrimaryButton}"
+                        Margin="0,0,8,4" Click="FilterButton_Click"/>
+                <Button Content="Сбросить" Style="{StaticResource SecondaryButton}"
+                        Margin="0,0,0,4" Click="ResetButton_Click"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- 3. Таблица животных -->
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}" Padding="8" Margin="0,0,0,12">
+            <DataGrid x:Name="AnimalsGrid"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      Background="#34231A"
+                      Foreground="#FFFFFF"
+                      GridLinesVisibility="Horizontal"
+                      HorizontalGridLinesBrush="#52392B"
+                      RowBackground="#34231A"
+                      AlternatingRowBackground="#3E2A1F"
+                      BorderThickness="0"
+                      RowHeight="34">
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#5A3B28"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#4E3323"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="#FFFFFF"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#FFFFFF"/>
+                </DataGrid.Resources>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#4D3426"/>
+                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="Padding" Value="10,8"/>
+                        <Setter Property="BorderBrush" Value="#684836"/>
+                        <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="#34231A"/>
+                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#462E21"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#5A3B28"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="#34231A"/>
+                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                        <Setter Property="Padding" Value="10,4"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridCell">
+                                    <Border Background="{TemplateBinding Background}"
+                                            Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#462E21"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#5A3B28"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="65"/>
+                    <DataGridTextColumn Header="Кличка" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Вид" Binding="{Binding SpeciesName}" Width="140"/>
+                    <DataGridTextColumn Header="Вольер" Binding="{Binding EnclosureCode}" Width="135"/>
+                    <DataGridTextColumn Header="Возраст (лет)" Binding="{Binding AgeYears}" Width="125"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="145"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- 4. Действия с выбранной строкой -->
+        <Border Grid.Row="3" Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+            <WrapPanel VerticalAlignment="Center">
+                <TextBlock Text="Выбранное животное:" FontWeight="SemiBold" Foreground="#FFFFFF"
+                           VerticalAlignment="Center" Margin="0,0,8,4"/>
+                <TextBlock Text="Новый статус:" Foreground="#FFFFFF"
+                           VerticalAlignment="Center" Margin="0,0,6,4"/>
+                <ComboBox x:Name="NewStatusComboBox" Style="{StaticResource InputCombo}"
+                          Width="145" Margin="0,0,8,4"/>
+                <Button Content="Сохранить статус" Style="{StaticResource SecondaryButton}"
+                        Margin="0,0,16,4" Click="ChangeStatusButton_Click"/>
+                <Button Content="В архив" Style="{StaticResource SecondaryButton}"
+                        Margin="0,0,0,4" Click="ArchiveAnimalButton_Click"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- 5. Добавление нового животного -->
+        <Border Grid.Row="4" Style="{StaticResource CardStyle}">
+            <WrapPanel VerticalAlignment="Center">
+                <TextBlock Text="Добавить животное:" FontWeight="SemiBold" Foreground="#FFFFFF"
+                           VerticalAlignment="Center" Margin="0,0,8,4"/>
+
+                <TextBlock Text="Кличка:" Foreground="#FFFFFF"
+                           VerticalAlignment="Center" Margin="0,0,6,4"/>
+                <TextBox x:Name="NewNameTextBox" Style="{StaticResource InputBox}"
+                         Width="145" Margin="0,0,10,4"/>
+
+                <TextBlock Text="Вид:" Foreground="#FFFFFF"
+                           VerticalAlignment="Center" Margin="0,0,6,4"/>
+                <ComboBox x:Name="NewSpeciesComboBox" Style="{StaticResource InputCombo}"
+                          Width="125" Margin="0,0,10,4"
+                          DisplayMemberPath="Name" SelectedValuePath="Id"/>
+
+                <TextBlock Text="Вольер:" Foreground="#FFFFFF"
+                           VerticalAlignment="Center" Margin="0,0,6,4"/>
+                <ComboBox x:Name="NewEnclosureComboBox" Style="{StaticResource InputCombo}"
+                          Width="125" Margin="0,0,10,4"
+                          DisplayMemberPath="Code" SelectedValuePath="Id"/>
+
+                <TextBlock Text="Возраст:" Foreground="#FFFFFF"
+                           VerticalAlignment="Center" Margin="0,0,6,4"/>
+                <TextBox x:Name="NewAgeTextBox" Style="{StaticResource InputBox}"
+                         Width="68" Margin="0,0,12,4" Text="1.0"/>
+
+                <Button Content="+ Добавить" Style="{StaticResource PrimaryButton}"
+                        Margin="0,0,0,4" Click="AddAnimalButton_Click"/>
+            </WrapPanel>
+        </Border>
+    </Grid>
+</Window>
