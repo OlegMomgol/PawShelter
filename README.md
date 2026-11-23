@@ -59,6 +59,9 @@
 * В **Visual Studio** откройте решение/проект из папки `src/` и нажмите `F5`.
 * В **PowerShell** выполните сборку и запуск проекта из папки `src/`:
 
+```powershell
+dotnet run --project src/PawShelter/PawShelter.csproj
+
 
 ### Скриншоты
 <img width="1266" height="721" alt="main_screen" src="https://github.com/user-attachments/assets/ca9a4c95-35b0-4e3a-b249-33cd323727fa" />
@@ -74,7 +77,7 @@
 <img width="1258" height="711" alt="search" src="https://github.com/user-attachments/assets/07a4be2f-86e6-4524-b7b6-2519ebde5ad0" />
 Поиск животного по имени
 <img width="954" height="606" alt="report" src="https://github.com/user-attachments/assets/178b733c-a2c4-4957-9376-1f3cc60cdb22" />
-Отчет
+ Отчет
 
 
 
